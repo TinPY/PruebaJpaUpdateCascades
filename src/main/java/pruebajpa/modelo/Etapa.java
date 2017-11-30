@@ -1,5 +1,6 @@
 package pruebajpa.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -59,7 +60,43 @@ public class Etapa {
         this.avance = avance;
     }
 
-    @Override
+    public Proyecto getProyectoid() {
+		return proyectoid;
+	}
+
+	public void setProyectoid(Proyecto proyectoid) {
+		this.proyectoid = proyectoid;
+	}
+	
+	public List<Tarea> getListaTareas() {
+		if(null == listaTareas){
+			listaTareas = new ArrayList<Tarea>();
+		}
+		
+		return listaTareas;
+	}
+
+	public void setListaTareas(List<Tarea> listaTareas) {
+		this.listaTareas = listaTareas;
+	}
+	
+	/**
+	 * Agregar a coleccion y setear etapa a tarea
+	 * 
+	 * Método de agregar a coleccion con setter como en Iphuy, pero más simple, sin el método interno
+	 * 
+	 * @param tarea
+	 */
+	public void agregarTarea(Tarea tarea) {
+
+		this.getListaTareas().add(tarea);
+        
+        if (tarea.getEtapa() != this) {
+            tarea.setEtapa(this);
+        }
+    }
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

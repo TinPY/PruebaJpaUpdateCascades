@@ -7,10 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import pruebajpa.modelo.Persona;
 import pruebajpa.modelo.Proyecto;
 
 @Stateless
-public class ProyectoFacade {
+public class PersonaFacade {
 
 	@PersistenceContext(unitName = "PRUEBAJPAPU")
     private EntityManager em;
@@ -19,35 +20,25 @@ public class ProyectoFacade {
         return em;
     }
     
-    public void GuardarProyecto(Proyecto proyecto){
+    public void GuardarPersona(Persona persona){
     	
     	try{
-    		em.persist(proyecto);
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    }
-    
-    public void ActualizarProyecto(Proyecto proyecto){
-    	
-    	try{
-    		em.merge(proyecto);
+    		em.persist(persona);
     	}catch(Exception e){
     		e.printStackTrace();
     	}
     }
     
     @SuppressWarnings("unchecked")
-	public List<Proyecto> ObtenerProyectos(){
+	public List<Persona> ObtenerPersonas(){
     	
-    	Query consulta = em.createQuery("SELECT p FROM Proyecto p", Proyecto.class);
+    	Query consulta = em.createQuery("SELECT p FROM Persona p", Persona.class);
     	return consulta.getResultList();
     }
     
-    public Proyecto ObtenerProyectoPorId(int id){
+    public Persona ObtenerPersonaPorId(int id){
     	
-    	return em.find(Proyecto.class, id);
-    	
+    	return em.find(Persona.class, id);
     }
 	
 	

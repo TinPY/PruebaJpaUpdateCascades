@@ -14,18 +14,48 @@
 
 <h:form>
 
-	<h:commandButton value="Guardar Proyecto" action="#{proyectoMB.GuardarEspecie()}"> </h:commandButton>
-
-	<p:commandButton value="Cargar Proyectos" actionListener="#{proyectoMB.CargarProyectos()}" update="tabla"> </p:commandButton>
+	<h:inputText id="nombrePersona" value="#{personaMB.nombrePersona}"></h:inputText>
+	<h:commandButton value="Guardar Persona" action="#{personaMB.GuardarPersona()}" update="nombrePersona"> </h:commandButton>
 	
 	<p:separator></p:separator>
 	
-	<p:dataTable id="tabla" value="#{proyectoMB.listaProyectos}" var="proyecto" >
+	<h:commandButton value="TEST > Guardar Proyecto Inicial" action="#{proyectoMB.TestGuardarProyectoInicial()}"> </h:commandButton>
+	
+	<h:commandButton value="TEST > Agregar Etapas y Tareas a Proyecto Inicial" action="#{proyectoMB.TestAgregarEtapasYTareasProyectoInicial()}"> </h:commandButton>
+	
+	<h:commandButton value="TEST > Actualizar Etapas y Tareas a Proyecto Inicial" action="#{proyectoMB.TestActualizarEtapasYTareasProyectoInicial()}"> </h:commandButton>
+	
+	<p:separator></p:separator>
+	
+	<p:commandButton value="Cargar Proyectos" actionListener="#{proyectoMB.CargarProyectos()}" update="tablaProyectos"> </p:commandButton>
+	<p:commandButton value="Cargar Personas" actionListener="#{personaMB.CargarPersonas()}" update="tablaPersonas"> </p:commandButton>
+	
+	<p:separator></p:separator>
+	
+	<p>Personas</p>
+	
+	<p:dataTable id="tablaPersonas" value="#{personaMB.listaPersonas}" var="persona" >
+		<p:column >
+			<h:outputText value="#{persona.id}"></h:outputText>
+		</p:column>
+		<p:column >
+			<h:outputText value="#{persona.nombre}"></h:outputText>
+		</p:column>
+	</p:dataTable>
+	
+	<p:separator></p:separator>
+	
+	<p>Proyectos</p>
+	
+	<p:dataTable id="tablaProyectos" value="#{proyectoMB.listaProyectos}" var="proyecto" >
 		<p:column >
 			<h:outputText value="#{proyecto.id}"></h:outputText>
 		</p:column>
 		<p:column >
 			<h:outputText value="#{proyecto.nombreproyecto}"></h:outputText>
+		</p:column>
+		<p:column >
+			<h:outputText value="#{proyecto.personasResponsable}"></h:outputText>
 		</p:column>
 	</p:dataTable>
 	

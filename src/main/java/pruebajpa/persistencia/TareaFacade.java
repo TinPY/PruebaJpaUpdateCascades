@@ -7,10 +7,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import pruebajpa.modelo.Etapa;
 import pruebajpa.modelo.Proyecto;
+import pruebajpa.modelo.Tarea;
 
 @Stateless
-public class ProyectoFacade {
+public class TareaFacade {
 
 	@PersistenceContext(unitName = "PRUEBAJPAPU")
     private EntityManager em;
@@ -19,35 +21,40 @@ public class ProyectoFacade {
         return em;
     }
     
-    public void GuardarProyecto(Proyecto proyecto){
+    public Tarea ObtenerTareaPorId(int id){
+    	try{
+    		return getEntityManager().find(Tarea.class, id);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+    
+    public void GuardarTarea(Tarea tarea){
     	
     	try{
-    		em.persist(proyecto);
+    		em.persist(tarea);
     	}catch(Exception e){
     		e.printStackTrace();
     	}
     }
     
-    public void ActualizarProyecto(Proyecto proyecto){
+    public void ActualizarTarea(Tarea tarea){
     	
     	try{
-    		em.merge(proyecto);
+    		em.merge(tarea);
     	}catch(Exception e){
     		e.printStackTrace();
     	}
     }
     
-    @SuppressWarnings("unchecked")
-	public List<Proyecto> ObtenerProyectos(){
+    public void BorrarTarea(Tarea tarea){
     	
-    	Query consulta = em.createQuery("SELECT p FROM Proyecto p", Proyecto.class);
-    	return consulta.getResultList();
-    }
-    
-    public Proyecto ObtenerProyectoPorId(int id){
-    	
-    	return em.find(Proyecto.class, id);
-    	
+    	try{
+    		em.remove(tarea);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
     }
 	
 	

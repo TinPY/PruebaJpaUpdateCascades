@@ -51,6 +51,26 @@ public class Tarea {
     public void setPrioridad(Integer prioridad) {
         this.prioridad = prioridad;
     }
+    
+	public Etapa getEtapa() {
+		return etapa;
+	}
+
+	public void setEtapa(Etapa etapa) {
+		this.etapa = etapa;
+	}
+	
+	/**
+	 * Método que quita la referencia a la Etapa.
+	 * Ocurre antes de un EntityManager.remove()
+	 * 
+	 */
+	@PreRemove
+	public void preRemove() {
+		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa().getNombreetapa());
+		setEtapa(null);
+		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa());
+	}
 
     @Override
     public boolean equals(Object o) {
@@ -75,13 +95,7 @@ public class Tarea {
     }
 
     
-	public Etapa getEtapa() {
-		return etapa;
-	}
 
-	public void setEtapa(Etapa etapa) {
-		this.etapa = etapa;
-	}
     
     
     

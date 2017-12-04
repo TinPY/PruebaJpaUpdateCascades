@@ -151,12 +151,12 @@ public class ProyectoMB implements Serializable {
 		// version 1: se agrega a etapa y se setea manualmente.
 		// version 2: (método simplificado de iphuy) usamos método AGREGAR & SETTEAR
 		
-		etapa1.agregarTarea(tarea1A);
-		etapa1.agregarTarea(tarea1B);
+		etapa1.AgregarTarea(tarea1A);
+		etapa1.AgregarTarea(tarea1B);
 		
-		etapa2.agregarTarea(tarea2A);
-		etapa2.agregarTarea(tarea2B);
-		etapa2.agregarTarea(tarea2C);
+		etapa2.AgregarTarea(tarea2A);
+		etapa2.AgregarTarea(tarea2B);
+		etapa2.AgregarTarea(tarea2C);
 		
 		// agregamos las etapas al proyecto (PROYECTO SIN LISTA DE ETAPAS)
 		etapa1.setProyectoid(proyecto);
@@ -190,12 +190,38 @@ public class ProyectoMB implements Serializable {
 		
 		// obtenemos las etapa actuales
 		List<Etapa> listaEtapas = this.getEtapaFacade().ObtenerEtapasDeProyecto(proyecto.getId());
+		System.out.println("PRE ACTUALIZACION");
+		for(Etapa e : listaEtapas){
+			System.out.println("Etapa: " + e.getNombreetapa());
+			
+			for(Tarea t : e.getListaTareas()){
+				System.out.println("Tarea: " + t.getNombretarea());
+			}
+		}
 		
+		// PRUEBA 1
 		// quitamos etapa '1'
+		System.out.println("PRUEBA 1");
+		
 		Etapa etapa1borrar = this.getEtapaFacade().ObtenerEtapaPorId(1);
 		this.getEtapaFacade().BorrarEtapa(etapa1borrar);
 		
+		// chequeo
+		listaEtapas = this.getEtapaFacade().ObtenerEtapasDeProyecto(proyecto.getId());
+		System.out.println("ACTUALIZACION CHEQUEO PRUEBA 1");
+		for(Etapa e : listaEtapas){
+			System.out.println("Etapa: " + e.getNombreetapa());
+			
+			for(Tarea t : e.getListaTareas()){
+				System.out.println("Tarea: " + t.getNombretarea());
+			}
+		}
+		
+		// PRUEBA 2
 		// agregamos etapa '3' con 1 tarea
+		
+		System.out.println("PRUEBA 2");
+		
 		Etapa etapa3 = new Etapa();
 		etapa3.setNombreetapa("Etapa 3");
 		etapa3.setAvance(57);
@@ -204,39 +230,60 @@ public class ProyectoMB implements Serializable {
 		tarea3A.setNombretarea("Tarea A - Etapa 3");
 		tarea3A.setPrioridad(99);
 		
-		etapa3.agregarTarea(tarea3A);
+		etapa3.AgregarTarea(tarea3A);
 		
 		etapa3.setProyectoid(proyecto);
 		
 		getEtapaFacade().GuardarEtapa(etapa3); 			// persistencia
 		
-		// quitamos tarea 'B' de etapa '2' (Asumimos que conocemos el id de ambas, HARDCODEADO)
-		// TODO: obtenerlos por por otros medios
-		Etapa etapa2 = this.getEtapaFacade().ObtenerEtapaPorId(2);
-		
-		Tarea tarea2B = this.getTareaFacade().ObtenerTareaPorId(4);
-		
-		// inicio de proceso de desvinculación
-		etapa2.getListaTareas().remove(tarea2B);
-		
-		
-		// persistimos Etapa, para ver si guarda 
-		
-		
-		// persistimos las etapas
-		
-		
-		// verificamos las nuevas etapas del proyecto
-		List<Etapa> etapasActualizadas = this.getEtapaFacade().ObtenerEtapasDeProyecto(proyecto.getId());
-		
-		System.out.println("Etapas Actualizadas");
-		for(Etapa e : etapasActualizadas){
+		// chequeo
+		listaEtapas = this.getEtapaFacade().ObtenerEtapasDeProyecto(proyecto.getId());
+		System.out.println("ACTUALIZACION CHEQUEO PRUEBA 2");
+		for(Etapa e : listaEtapas){
 			System.out.println("Etapa: " + e.getNombreetapa());
 			
 			for(Tarea t : e.getListaTareas()){
 				System.out.println("Tarea: " + t.getNombretarea());
 			}
 		}
+		
+		// PRUEBA 3
+		// quitamos tarea 'B' de etapa '2' (Asumimos que conocemos el id de ambas, HARDCODEADO)
+		// TODO: obtenerlos por por otros medios
+		
+		System.out.println("PRUEBA 3");
+		
+		//Etapa etapa2 = this.getEtapaFacade().ObtenerEtapaPorId(2);
+		
+		Tarea tarea2B = this.getTareaFacade().ObtenerTareaPorId(4);
+		Etapa etapa2 = tarea2B.getEtapa();
+		
+		etapa2.BorrarTarea(tarea2B);
+		
+		// inicio de proceso de desvinculación
+		//etapa2.getListaTareas().remove(tarea2B);
+		
+		// desvinculacion con preRemove desde EntityManager
+		//this.getTareaFacade().BorrarTarea(tarea2B);
+		
+		this.getEtapaFacade().ActualizarEtapa(etapa2);
+		
+		// persistimos Etapa, para ver si guarda 
+		//this.getEtapaFacade().ActualizarEtapa(etapa2);
+		
+		
+		// chequeo
+		listaEtapas = this.getEtapaFacade().ObtenerEtapasDeProyecto(proyecto.getId());
+		System.out.println("ACTUALIZACION CHEQUEO PRUEBA 3");
+		for(Etapa e : listaEtapas){
+			System.out.println("Etapa: " + e.getNombreetapa());
+			
+			for(Tarea t : e.getListaTareas()){
+				System.out.println("Tarea: " + t.getNombretarea());
+			}
+		}
+		
+		// PRUEBA 4
 		
 		
 	}

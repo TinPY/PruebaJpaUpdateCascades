@@ -29,8 +29,8 @@ public class Etapa {
     @ManyToOne
     private Proyecto proyectoid;
     
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name="etapaid")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy="etapa", orphanRemoval=true)			// TODO: AGREGAR orphanRemoval
+    //@JoinColumn(name="etapaid") 																				// TODO: QUITAR DE NORTIA
     private List<Tarea> listaTareas;
 
     
@@ -87,7 +87,7 @@ public class Etapa {
 	 * 
 	 * @param tarea
 	 */
-	public void agregarTarea(Tarea tarea) {
+	public void AgregarTarea(Tarea tarea) {
 
 		this.getListaTareas().add(tarea);
         
@@ -95,6 +95,12 @@ public class Etapa {
             tarea.setEtapa(this);
         }
     }
+	
+	public void BorrarTarea(Tarea tarea){
+		
+		this.getListaTareas().remove(tarea);
+		tarea.setEtapa(null);
+	}
 
 	@Override
     public boolean equals(Object o) {

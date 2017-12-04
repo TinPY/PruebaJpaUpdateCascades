@@ -59,7 +59,7 @@ public class EtapaFacade {
     	
     	try{
     		
-    		em.remove(etapa);
+    		em.remove(em.contains(etapa) ? etapa : em.merge(etapa));
     		
     	}catch(Exception e){
     		e.printStackTrace();

@@ -65,12 +65,12 @@ public class Tarea {
 	 * Ocurre antes de un EntityManager.remove()
 	 * 
 	 */
-	@PreRemove
-	public void preRemove() {
-		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa().getNombreetapa());
-		setEtapa(null);
-		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa());
-	}
+//	@PreRemove
+//	public void preRemove() {
+//		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa().getNombreetapa());
+//		setEtapa(null);
+//		System.out.println("Tarea [preRemove] " + this.getId() + " - Referencia Etapa > " +  this.getEtapa());
+//	}
 
     @Override
     public boolean equals(Object o) {

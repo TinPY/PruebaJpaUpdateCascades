@@ -51,11 +51,10 @@ public class TareaFacade {
     public void BorrarTarea(Tarea tarea){
     	
     	try{
-    		em.remove(tarea);
+    		em.remove(em.contains(tarea) ? tarea : em.merge(tarea));
     	}catch(Exception e){
     		e.printStackTrace();
     	}
     }
-	
-	
+
 }

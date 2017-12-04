@@ -284,6 +284,27 @@ public class ProyectoMB implements Serializable {
 		}
 		
 		// PRUEBA 4
+//		System.out.println("PRUEBA 4");
+//		Etapa etapa2borrarTarea = this.getEtapaFacade().ObtenerEtapaPorId(2);
+//		System.out.println("Tareas de Etapa 2: " + etapa2borrarTarea.getListaTareas().size());
+//		this.getTareaFacade().BorrarTarea(5);
+//		System.out.println("Tareas de Etapa 2 asd: " + etapa2borrarTarea.getListaTareas().size());
+		
+		// PRUEBA 5: actualizar una propiedad de una tarea
+		
+		System.out.println("PRUEBA 5");
+		
+		Tarea tarea3 = this.getTareaFacade().ObtenerTareaPorId(3); // "Tarea A - Etapa 2"
+		
+		System.out.println("Tarea A - Etapa 2 [ID: 3] - prioridad: " + tarea3.getPrioridad());
+		
+		tarea3.setPrioridad(0);
+		
+		this.getEtapaFacade().ActualizarEtapa(tarea3.getEtapa());
+		
+		Tarea tarea3actualizada = this.getTareaFacade().ObtenerTareaPorId(3); // "Tarea A - Etapa 2"
+		
+		System.out.println("ACTUALIZADA > Tarea A - Etapa 2 [ID: 3] - prioridad: " + tarea3actualizada.getPrioridad());
 		
 		
 	}

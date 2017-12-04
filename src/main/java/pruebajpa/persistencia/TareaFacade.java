@@ -48,13 +48,27 @@ public class TareaFacade {
     	}
     }
     
-    public void BorrarTarea(Tarea tarea){
-    	
-    	try{
-    		em.remove(em.contains(tarea) ? tarea : em.merge(tarea));
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    }
+    // AMBOS BORRAR SE QUITAN, EL BORRADO SE REALIZA DESDE EL OBJETO MODELO ETAPA y SE ACTUALIZA EL MISMO
+    
+	//    public void BorrarTarea(Tarea tarea){
+	//    	
+	//    	try{
+	//    		//em.remove(em.contains(tarea) ? tarea : em.merge(tarea));
+	//    		//em.remove(em.merge(tarea));
+	//    		em.remove(tarea);
+	//    	}catch(Exception e){
+	//    		e.printStackTrace();
+	//    	}
+	//    }
+	
+	//public void BorrarTarea(int id){
+	//    	
+	//	try{
+	//		Tarea tareaBorrar = em.find(Tarea.class, id);
+	//		em.remove(tareaBorrar);
+	//	}catch(Exception e){
+	//		e.printStackTrace();
+	//	}
+	//}
 
 }

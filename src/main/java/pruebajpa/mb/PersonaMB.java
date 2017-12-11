@@ -83,5 +83,33 @@ public class PersonaMB implements Serializable {
 		
 	}
 	
+	public void InstalarPersonas(){
+		Persona persona1 = new Persona();
+		persona1.setNombre("Tincho");
+		persona1.setTelefono("154685");
+		this.getPersonaFacade().GuardarPersona(persona1);
+		
+		Persona persona2 = new Persona();
+		persona2.setNombre("Rodri");
+		persona2.setTelefono("128389");
+		this.getPersonaFacade().GuardarPersona(persona2);
+		
+		Persona persona3 = new Persona();
+		persona3.setNombre("Romi");
+		persona3.setTelefono("7456514");
+		this.getPersonaFacade().GuardarPersona(persona3);
+		
+		Persona persona4 = new Persona();
+		persona4.setNombre("Javi");
+		persona4.setTelefono("9873123");
+		this.getPersonaFacade().GuardarPersona(persona4);
+		
+		Persona persona5 = new Persona();
+		persona5.setNombre("German");
+		persona5.setTelefono("68413212");
+		this.getPersonaFacade().GuardarPersona(persona5);
+		
+	}
+	
 	
 }

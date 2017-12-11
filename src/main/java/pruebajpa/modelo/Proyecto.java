@@ -1,6 +1,13 @@
 package pruebajpa.modelo;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * Created by MartinPY on 26/10/2017.
@@ -22,7 +29,10 @@ public class Proyecto {
     @ManyToOne
     @JoinColumn(name = "responsable", referencedColumnName = "id")
     private Persona personasResponsable;
-
+    
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy="proyectoid", orphanRemoval=true)			// TODO: AGREGAR A NORTIA > Lista de Etapas, FetchMode y orphanRemoval
+    @Fetch(FetchMode.SELECT)
+    private List<Etapa> listaEtapas;
 
     public int getId() {
         return id;
@@ -40,7 +50,45 @@ public class Proyecto {
         this.nombreproyecto = nombreproyecto;
     }
 
-    @Override
+    public List<Etapa> getListaEtapas() {
+		return listaEtapas;
+	}
+
+	public void setListaEtapas(List<Etapa> listaEtapas) {
+		this.listaEtapas = listaEtapas;
+	}
+	
+	/**
+	 * TODO: AGREGAR A NORTIA [Proyecto.AgregarEtapa()]
+	 * 
+	 * Agregar a coleccion y setear proyecto a la etapa
+	 * 
+	 * @param etapa
+	 */
+	public void AgregarEtapa(Etapa etapa) {
+
+		this.getListaEtapas().add(etapa);
+		
+		if(etapa.getProyectoid() != this){
+			etapa.setProyectoid(this);
+		}
+        
+    }
+	
+	/**
+	 * TODO: AGREGAR A NORTIA [Proyecto.BorrarEtapa()]
+	 * 
+	 * Quitar de la coleccion y setear proyecto a null
+	 * 
+	 * @param etapa
+	 */
+	public void BorrarEtapa(Etapa etapa){
+		
+		this.getListaEtapas().remove(etapa);
+		etapa.setProyectoid(null);
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

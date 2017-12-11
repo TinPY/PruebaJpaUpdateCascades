@@ -7,12 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
+
 import pruebajpa.modelo.Proyecto;
 
 @Stateless
 public class ProyectoFacade {
 
-	@PersistenceContext(unitName = "PRUEBAJPAPU")
+	@PersistenceContext(unitName = "PRUEBAJPAPU" )
     private EntityManager em;
     
     protected EntityManager getEntityManager() {
@@ -47,7 +49,7 @@ public class ProyectoFacade {
     public Proyecto ObtenerProyectoPorId(int id){
     	
     	return em.find(Proyecto.class, id);
-    	
+
     }
 	
 	

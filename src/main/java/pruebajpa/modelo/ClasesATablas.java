@@ -84,8 +84,11 @@ public class ClasesATablas {
 //                                  Departamento.class,
                                   Persona.class,
                                   Proyecto.class,
+                                  Rubro.class,
                                   Etapa.class,
-                                  Tarea.class
+                                  Tarea.class,
+                                  PresupuestoTarea.class,
+                                  AgenteTarea.class
 
 //                                  SolicitudDesignacion.class
                                 };

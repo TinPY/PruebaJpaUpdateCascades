@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 /**
  * Created by MartinPY on 26/10/2017.
  */
@@ -26,11 +29,13 @@ public class Etapa {
     @Column(name = "avance", nullable = true)
     private Integer avance;
     
-    @ManyToOne
+	@JoinColumn(name = "proyectoid", referencedColumnName = "id")												// TODO: AGREGAR TODA LA LINEA [JoinColumn]
+    @ManyToOne(optional = false) 																				// TODO: AGREGAR optional=false
     private Proyecto proyectoid;
     
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy="etapa", orphanRemoval=true)			// TODO: AGREGAR orphanRemoval
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy="etapa", orphanRemoval=true)			// TODO: AGREGAR en OneToMany > orphanRemoval 
     //@JoinColumn(name="etapaid") 																				// TODO: QUITAR DE NORTIA
+    @Fetch(FetchMode.SELECT)																					// TODO: AGREGAR FetchMode.SELECT
     private List<Tarea> listaTareas;
 
     
@@ -81,6 +86,8 @@ public class Etapa {
 	}
 	
 	/**
+	 * TODO: AGREGAR A NORTIA [Etapa.AgregarTarea()]
+	 * 
 	 * Agregar a coleccion y setear etapa a tarea
 	 * 
 	 * Método de agregar a coleccion con setter como en Iphuy, pero más simple, sin el método interno
@@ -96,6 +103,13 @@ public class Etapa {
         }
     }
 	
+	/**
+	 * TODO: AGREGAR A NORTIA [Etapa.BorrarTarea()]
+	 * 
+	 * Quitar de la coleccion y setear etapa a null
+	 * 
+	 * @param tarea
+	 */
 	public void BorrarTarea(Tarea tarea){
 		
 		this.getListaTareas().remove(tarea);

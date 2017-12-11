@@ -59,11 +59,30 @@ public class EtapaFacade {
     	
     	try{
     		
-    		em.remove(em.contains(etapa) ? etapa : em.merge(etapa));
+    		if(em.contains(etapa)){
+    			System.out.println("Si lo contiene: SIN MERGE");
+    			em.remove(etapa);
+    		}else{
+    			System.out.println("No lo contiene: CON MERGE");
+    			em.remove(em.merge(etapa));
+    		}
     		
     	}catch(Exception e){
     		e.printStackTrace();
     	}
+    }
+    
+    public void BorrarEtapaVersion2(Etapa etapa){
+    	
+    	try{
+    		System.out.println("EtapaFacade.BorrarVersion2 Inicio");
+    		Etapa e = em.find(Etapa.class, etapa.getId());
+    		em.remove(e);
+    		System.out.println("EtapaFacade.BorrarVersion2 Fin");
+    	}catch(Exception e){
+    		
+    	}
+    	
     }
 	
 	

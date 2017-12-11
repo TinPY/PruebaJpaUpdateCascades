@@ -1,33 +1,4 @@
-
-    alter table pruebajpa.public.agente_tarea 
-        drop constraint FK_9a32422904644576bdd4ef7b790;
-    alter table pruebajpa.public.agente_tarea 
-        drop constraint FK_2c56cd0790a44486a91066f8426;
-    alter table pruebajpa.public.etapas 
-        drop constraint FK_921f4e4f2f154cb9affd4517ba3;
-    alter table pruebajpa.public.presupuesto_tarea 
-        drop constraint FK_17c3c7fd41914583b178c527aca;
-    alter table pruebajpa.public.presupuesto_tarea 
-        drop constraint FK_b6845fc8321d454a8432ba1bcfa;
-    alter table pruebajpa.public.proyectos 
-        drop constraint FK_167bfb59096c4e91aebfa77df96;
-    alter table pruebajpa.public.tareas 
-        drop constraint FK_323b0b5877e14d71a8e8ea52999;
-    drop table if exists pruebajpa.public.agente_tarea cascade;
-    drop table if exists pruebajpa.public.etapas cascade;
-    drop table if exists pruebajpa.public.personas cascade;
-    drop table if exists pruebajpa.public.presupuesto_tarea cascade;
-    drop table if exists pruebajpa.public.proyectos cascade;
-    drop table if exists pruebajpa.public.rubro cascade;
-    drop table if exists pruebajpa.public.tareas cascade;
-    drop sequence agente_tarea_id_seq;
-    drop sequence etapa_id_seq;
-    drop sequence persona_id_seq;
-    drop sequence proyecto_id_seq;
-    drop sequence public.presupuesto_tarea_id_seq;
-    drop sequence rubro_id_seq;
-    drop sequence tarea_id_seq;
-    create table pruebajpa.public.agente_tarea (
+﻿create table pruebajpa.public.agente_tarea (
         id int4 not null,
         costo numeric(19, 2),
         funcion varchar(50),
